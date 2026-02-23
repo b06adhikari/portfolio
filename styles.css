@@ -509,12 +509,22 @@ section {
 .projects-section {
     background: var(--light-color);
 }
-
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
+.projects-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
 }
+.projects-container {
+    overflow: hidden;
+    width: 100%;
+}
+.projects-track {
+    display: flex;
+    gap: 30px;
+    ;transition: tranform 0.5s ease;
+}
+
 
 .project-card {
     background: var(--white);
@@ -524,6 +534,9 @@ section {
     transition: var(--transition);
     cursor: pointer;
     border: 1px solid #f1f5f9;
+    flex: 0 0 calc((100% - 60px) / 3);
+    min-width: calc((100% - 60px) / 3);
+    flex-shrink: 0;
 }
 
 .project-card:hover {
@@ -556,7 +569,7 @@ section {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(37, 99, 235, 0.92);
+    background: rgba(245, 189, 189, 0.484);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -569,7 +582,7 @@ section {
 }
 
 .view-project {
-    color: var(--white);
+    color: var(--black);
     text-decoration: none;
     padding: 14px 32px;
     border: 2px solid var(--white);
@@ -639,10 +652,52 @@ section {
     transition: var(--transition-fast);
 }
 
+.projects-wrapper:hover .projects-track {
+    animation-play-state: paused;
+}
+
 .project-tags span:hover {
     background: var(--primary-color);
     color: var(--white);
     transform: translateY(-2px);
+}
+.slider-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    font-size: 28px;
+    padding: 12px 16px;
+    cursor: pointer;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 10;
+}
+
+.prev {
+    left: -20px;
+}
+
+.next {
+    right: -20px;
+}
+.slider-dots {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.slider-dots span {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: #cbd5e1;
+    border-radius: 50%;
+    margin: 0 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.slider-dots span.active {
+    background: var(--primary-color);
 }
 
 /* Work Section */

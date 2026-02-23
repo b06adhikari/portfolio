@@ -237,7 +237,6 @@ serviceCards.forEach(card => {
 
 // Console log on page load
 console.log('%c Portfolio Website Loaded Successfully! ', 'background: #2563eb; color: white; font-size: 16px; padding: 10px;');
-console.log('%c Made with ❤️ ', 'background: #7c3aed; color: white; font-size: 14px; padding: 5px;');
 
 // Parallax effect for home section (subtle)
 window.addEventListener('scroll', () => {
@@ -257,4 +256,56 @@ window.addEventListener('load', () => {
 // Prevent form resubmission on page refresh
 if (window.history.replaceState) {
     window.history.replaceState(null, null, window.location.href);
+}
+
+
+// sliding function for project section
+
+const track = document.querySelector('.projects-track');
+const cards = document.querySelectorAll('.project-card');
+const nextBtn = document.querySelector('.next');
+const prevBtn = document.querySelector('.prev');
+const dotsContainer = document.querySelector('.slider-dots');
+
+let index = 0;
+const cardsPerView = 3;
+const totalSlides = Math.ceil(cards.length / cardsPerView);
+
+// Create dots
+for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('span');
+    if (i === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => moveToSlide(i));
+    dotsContainer.appendChild(dot);
+}
+
+const dots = document.querySelectorAll('.slider-dots span');
+
+function updateDots() {
+    dots.forEach(dot => dot.classList.remove('active'));
+    dots[index].classList.add('active');
+}
+
+function moveToSlide(slideIndex) {
+    index = slideIndex;
+    const slideWidth = cards[0].offsetWidth + 30;
+    track.style.transform = `translateX(-${slideWidth * cardsPerView * index}px)`;
+    updateDots();
+}
+
+nextBtn.addEventListener('click', () => {
+    if (index < totalSlides - 1) {
+        moveToSlide(index + 1);
+    }
+});
+
+prevBtn.addEventListener('click', () => {
+    if (index > 0) {
+        moveToSlide(index - 1);
+    }
+});
+
+// map function
+function openMap() {
+    window.open('https://www.google.com/maps/place/Pragya+%26+Medhavi+Kirana+Pasal/@27.660468,85.4208002,189m/data=!3m2!1e3!4b1!4m6!3m5!1s0x39eb11b54838bd7f:0xd336211a66306b52!8m2!3d27.6604668!4d85.4214439!16s%2Fg%2F11v3q650pl?entry=ttu&g_ep=EgoyMDI2MDIxOC4wIKXMDSoASAFQAw%3D%3D', '_blank');
 }
